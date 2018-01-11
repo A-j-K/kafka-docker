@@ -1,0 +1,10 @@
+FROM golang:latest
+WORKDIR /go/src/app
+RUN go get github.com/Shopify/sarama
+RUN go get gopkg.in/alecthomas/kingpin.v2
+RUN go get github.com/samuel/go-zookeeper/zk
+WORKDIR /go/src/app
+COPY producer.go ./
+RUN go build -o producer .
+CMD ["/go/src/app/producer"]
+
