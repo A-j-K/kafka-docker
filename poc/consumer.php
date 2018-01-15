@@ -63,9 +63,9 @@ $topic->consumeStart(0, RD_KAFKA_OFFSET_BEGINNING);
 $hostname = gethostname();
 
 function process(RdKafka\Topic $in_topic) {
-	$message = $in_topic->consume(0, 5*1000);
+	$message = $in_topic->consume(0, 120*1000);
 	if(is_null($message)) {
-		 echo "Null says timeout\n";
+		echo "Null says timeout, retrying\n";
 	}
 	else if($message instanceof RdKafka\Message) {
 		switch ($message->err) {
